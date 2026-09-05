@@ -1,6 +1,6 @@
 /* ==========================================================================
    MALCOLM LTD — homepage
-   Built from the supplied mockup (1728px MacBook Pro 16" frame, 1440px grid).
+   Built from the supplied UI design (1728px frame, 1440px grid).
    All sizes are derived from that reference and scale fluidly down to 320px.
    ========================================================================== */
 
@@ -8,15 +8,17 @@
    1. Tokens
    -------------------------------------------------------------------------- */
 :root {
-  /* Brand */
-  --green:        #739D57;   /* sampled from the mockup */
-  --green-dark:   #618A46;   /* hover / pressed */
-  --green-deep:   #55793C;
-  --slate:        #535B5E;   /* logo wordmark grey */
+  /* Brand — sampled from the design PDF's raw colour values */
+  --green:        #679E4D;
+  --green-dark:   #57883E;   /* hover / pressed */
+  --green-pale:   #E5F8DD;   /* testimonial card, form fields */
+  --slate:        #56626A;   /* logo wordmark grey */
   --ink:          #000000;
   --ink-soft:     #4A4A4A;
   --white:        #FFFFFF;
   --hairline:     #E6E6E6;
+  --rule:         #D7D7D7;   /* FAQ dividers */
+  --dot-idle:     #5D6970;   /* carousel dots, inactive */
 
   /* Layout: 1440px content column, 144px margins at the 1728px reference */
   --gutter:       clamp(20px, 3vw, 48px);
@@ -26,12 +28,12 @@
   --fs-body:      clamp(1rem,     0.299vw + 0.927rem, 1.25rem);   /* 16 → 20 */
   --fs-lead:      clamp(1.125rem, 0.448vw + 1.016rem, 1.5rem);    /* 18 → 24 */
   --fs-h1:        clamp(2.5rem,   4.484vw + 1.407rem, 6.25rem);   /* 40 → 100 */
-  --fs-h2:        clamp(2rem,     2.541vw + 1.381rem, 4.125rem);  /* 32 → 66 */
-  --fs-h2-sm:     clamp(1.875rem, 1.345vw + 1.547rem, 3rem);      /* 30 → 48 */
+  --fs-h2:        clamp(1.875rem, 1.495vw + 1.511rem, 3.125rem);  /* 30 → 50 */
   --fs-h3:        clamp(1.375rem, 0.897vw + 1.156rem, 2.125rem);  /* 22 → 34 */
   --fs-small:     clamp(0.9375rem, 0.15vw + 0.87rem, 1rem);       /* 15 → 16 */
+  --fs-mini:      clamp(0.875rem, 0.15vw + 0.808rem, 1rem);       /* 14 → 16 */
 
-  /* Radii measured off the mockup */
+  /* Radii measured off the design */
   --r-card:       28px;
   --r-block:      20px;
   --r-btn:        20px;
@@ -67,7 +69,7 @@ body {
 img, svg { display: block; max-width: 100%; }
 img { height: auto; }
 
-h1, h2, h3, p, ul, ol, figure { margin: 0; }
+h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 
 a { color: inherit; text-decoration: none; }
@@ -145,18 +147,24 @@ button {
 .section-title {
   font-size: var(--fs-h2);
   font-weight: 800;
-  line-height: 1.17;
+  line-height: 1.18;
   letter-spacing: -0.025em;
-  margin-top: 6px;
-}
-
-.process-title {
-  font-size: var(--fs-h2-sm);
-  line-height: 1.15;
   margin-top: 4px;
 }
 
-.section { padding-block: 0; }
+/* Shared green artwork block (hero + about) */
+.media-block {
+  position: relative;
+  aspect-ratio: 628 / 597;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  border-radius: var(--r-block);
+  overflow: hidden;
+}
+.media-block-icon { width: 63.7%; height: auto; }
+/* If a photo replaces the placeholder it fills the block edge to edge */
+.media-block img { width: 100%; height: 100%; object-fit: cover; }
 
 /* --------------------------------------------------------------------------
    4. Buttons
@@ -328,19 +336,6 @@ button {
   margin-top: clamp(28px, 3.6vw, 62px);
 }
 
-.hero-media {
-  position: relative;
-  aspect-ratio: 628 / 597;
-  display: grid;
-  place-items: center;
-  background: var(--green);
-  border-radius: var(--r-block);
-  overflow: hidden;
-}
-.hero-media-icon { width: 63.7%; height: auto; }
-/* If a photo replaces the placeholder it fills the block edge to edge */
-.hero-media img { width: 100%; height: 100%; object-fit: cover; }
-
 /* --------------------------------------------------------------------------
    7. Services
    -------------------------------------------------------------------------- */
@@ -351,7 +346,7 @@ button {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: clamp(20px, 2.7vw, 46px);
   row-gap: clamp(20px, 2.2vw, 38px);
-  margin-top: clamp(28px, 2.08vw, 36px);
+  margin-top: clamp(24px, 1.56vw, 27px);
 }
 
 .card {
@@ -398,7 +393,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Reproduces the mockup's downward optical bias inside the card */
+  /* Reproduces the design's downward optical bias inside the card */
   padding-top: clamp(28px, 4.86vw, 84px);
 }
 
@@ -431,13 +426,13 @@ button {
 /* --------------------------------------------------------------------------
    8. Process
    -------------------------------------------------------------------------- */
-.process { padding-top: clamp(72px, 6.19vw, 107px); }
+.process { padding-top: clamp(56px, 3.36vw, 58px); }
 
 .steps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(24px, 1.4vw, 24px);
-  margin-top: clamp(32px, 2.66vw, 46px);
+  gap: 24px;
+  margin-top: clamp(32px, 2.55vw, 44px);
 }
 
 .step-num {
@@ -470,39 +465,285 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   9. Footer  (not part of the supplied mockup — minimal, same design language)
+   9. About
+   -------------------------------------------------------------------------- */
+.about { padding-top: clamp(56px, 4.4vw, 76px); }
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(32px, 3vw, 52px);
+  align-items: start;
+}
+
+.about-title {
+  text-transform: uppercase;
+  margin-top: clamp(14px, 1.16vw, 20px);
+}
+
+.about-text {
+  max-width: 700px;
+  margin-top: clamp(14px, 0.93vw, 16px);
+  line-height: 1.7;
+}
+.about-text + .about-text { margin-top: clamp(22px, 1.97vw, 34px); }
+
+/* --------------------------------------------------------------------------
+   10. Testimonials
+   -------------------------------------------------------------------------- */
+.testimonials { padding-top: clamp(56px, 5.5vw, 95px); }
+.testimonials .section-title { margin-top: 0; }
+
+.quotes {
+  margin-top: 13px;
+  background: var(--green-pale);
+  border-radius: var(--r-block);
+  overflow: hidden;
+}
+
+.quotes-track {
+  display: flex;
+  align-items: stretch;
+  transition: transform 0.5s var(--ease);
+}
+
+.quote {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: clamp(28px, 3.18vw, 55px) clamp(24px, 8.33vw, 144px)
+           clamp(28px, 3.07vw, 53px);
+}
+
+.stars { display: flex; gap: 12px; }
+.stars svg {
+  width: 21px; height: 21px;
+  fill: var(--green);
+}
+
+.quote-text {
+  max-width: 910px;
+  margin-top: clamp(24px, 3.07vw, 53px);
+  font-size: var(--fs-lead);
+  line-height: 1.58;
+}
+
+.quote-author {
+  margin-top: clamp(20px, 2.72vw, 47px);
+  line-height: 1.2;
+}
+.quote-name, .quote-role { display: block; }
+
+.quotes-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 19px;
+}
+.quotes-dots button {
+  width: 14px; height: 11px;
+  padding: 0;
+  border-radius: 3px;
+  background: var(--dot-idle);
+  transition: width 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+.quotes-dots button[aria-selected="true"] {
+  width: 27px;
+  background: var(--green);
+}
+.quotes-dots:empty { display: none; }
+
+/* --------------------------------------------------------------------------
+   11. Contact
+   -------------------------------------------------------------------------- */
+.contact { padding-top: clamp(64px, 6.83vw, 118px); }
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 2.66vw, 46px);
+  align-items: start;
+}
+
+.contact .section-title { margin-top: 12px; }
+
+.contact-lede { margin-top: clamp(18px, 1.62vw, 28px); }
+.contact-lede + .contact-lede { margin-top: 10px; }
+
+.contact-list { margin-top: clamp(28px, 2.66vw, 46px); }
+.contact-list li {
+  position: relative;
+  padding-left: 31px;
+  margin-bottom: 18px;
+}
+.contact-list li:last-child { margin-bottom: 0; }
+
+.contact-mark {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px; height: 10px;
+  background: var(--green);
+}
+
+.contact-label {
+  display: block;
+  font-size: var(--fs-mini);
+  line-height: 1.4;
+}
+.contact-value {
+  display: block;
+  font-weight: 700;
+  line-height: 1.4;
+}
+a.contact-value:hover { color: var(--green); }
+
+/* ---- form ---- */
+.field { margin-bottom: 11px; }
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--fs-body);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0 24px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--green-pale);
+  border: 0;
+  border-radius: 0;
+  outline-offset: -3px;
+}
+/* textarea is inline by default — that baseline gap adds stray height */
+.field textarea { display: block; }
+.field:last-of-type { margin-bottom: 0; }
+.field input {
+  height: clamp(56px, 4.11vw, 71px);
+}
+.field textarea {
+  min-height: clamp(140px, 10.7vw, 185px);
+  padding-block: 18px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.field ::placeholder { color: #6E7A68; opacity: 1; }
+
+.field input:focus-visible,
+.field textarea:focus-visible { outline: 3px solid var(--green); }
+
+/* Invalid only after a submit attempt, so typing is never nagged at */
+.contact-form.was-validated :invalid {
+  box-shadow: inset 0 0 0 2px #C0392B;
+}
+
+.btn-send {
+  min-width: clamp(180px, 13.3vw, 230px);
+  min-height: clamp(52px, 3.76vw, 65px);
+  margin-top: clamp(18px, 1.45vw, 25px);
+  padding: 0 24px;
+  border-radius: 0;
+  background: var(--green);
+  color: var(--white);
+  font-weight: 700;
+}
+.btn-send:hover { background: var(--green-dark); }
+.btn-send[disabled] { opacity: 0.6; cursor: progress; }
+
+.form-status {
+  margin-top: 16px;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+.form-status:empty { display: none; }
+.form-status.is-error { color: #C0392B; }
+.form-status.is-ok { color: var(--green-dark); font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   12. FAQ
+   -------------------------------------------------------------------------- */
+.faq { padding-top: clamp(56px, 4.75vw, 82px); }
+
+.faq-inner {
+  display: grid;
+  grid-template-columns: 0.66fr 1fr;
+  gap: clamp(32px, 4vw, 69px);
+  align-items: center;
+}
+
+.faq .section-title { margin-top: 0; line-height: 1.1; }
+
+.acc-item { border-bottom: 2px solid var(--rule); }
+
+.acc-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 30px 0 27px;
+  text-align: left;
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.4;
+}
+.acc-trigger:hover { color: var(--green); }
+
+.acc-icon {
+  position: relative;
+  flex: none;
+  width: 18px; height: 18px;
+  transition: transform 0.3s var(--ease);
+}
+.acc-icon::before,
+.acc-icon::after {
+  content: "";
+  position: absolute;
+  background: var(--green);
+}
+.acc-icon::before { left: 0; top: 6px; width: 18px; height: 6px; }
+.acc-icon::after  { top: 0; left: 6px; width: 6px; height: 18px; }
+
+.acc-trigger[aria-expanded="true"] .acc-icon { transform: rotate(45deg); }
+
+.acc-panel { padding: 0 60px 28px 0; }
+.acc-panel p {
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   13. Footer
    -------------------------------------------------------------------------- */
 .site-footer {
-  margin-top: clamp(80px, 8.7vw, 150px);
-  padding-block: clamp(32px, 3vw, 52px);
-  border-top: 1px solid var(--hairline);
+  margin-top: clamp(64px, 6.83vw, 118px);
+  padding-bottom: clamp(32px, 2.5vw, 43px);
 }
 
 .footer-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 24px clamp(28px, 4vw, 64px);
 }
 
-.footer-logo img { width: clamp(150px, 13vw, 208px); }
+.footer-logo img { width: clamp(190px, 16.5vw, 286px); }
 
-.footer-nav {
+.footer-copy { color: var(--ink); }
+
+.footer-social {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(20px, 2.4vw, 40px);
-  font-size: var(--fs-small);
+  gap: clamp(24px, 4.75vw, 82px);
 }
-.footer-nav a:hover { color: var(--green); }
-
-.footer-copy {
-  margin-left: auto;
-  font-size: var(--fs-small);
-  color: var(--ink-soft);
-}
+.footer-social a:hover { color: var(--green); }
 
 /* --------------------------------------------------------------------------
-   10. Scroll reveal
+   14. Scroll reveal
    -------------------------------------------------------------------------- */
 .js .reveal {
   opacity: 0;
@@ -512,11 +753,11 @@ button {
   opacity: 1;
   transform: none;
   transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: var(--delay, 0ms);
 }
-.js .reveal.is-visible { transition-delay: var(--delay, 0ms); }
 
 /* --------------------------------------------------------------------------
-   11. Responsive
+   15. Responsive
    -------------------------------------------------------------------------- */
 
 /* Steps: 4 → 2 columns */
@@ -525,12 +766,19 @@ button {
   .step-text { max-width: none; }
 }
 
-/* Hero stacks */
+/* Two-column sections stack */
 @media (max-width: 940px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-media { aspect-ratio: 16 / 11; }
+  .hero-inner,
+  .about-inner,
+  .contact-inner,
+  .faq-inner { grid-template-columns: 1fr; gap: 40px; }
+
+  .hero .media-block { aspect-ratio: 16 / 11; }
+  .about .media-block { aspect-ratio: 16 / 10; }
   .lead { max-width: 52ch; }
   .hero-actions .btn { min-width: 0; flex: 1 1 240px; }
+  .about-text { max-width: none; }
+  .acc-panel { padding-right: 0; }
 }
 
 /* Mobile navigation */
@@ -538,10 +786,13 @@ button {
   .header-cta { display: none; }
   .nav-toggle { display: flex; }
 
-  /* Horizontal lockup keeps the sticky header shallow on phones */
+  /* Horizontal lockup keeps the sticky header shallow on phones.
+     Sized by height, never aspect-ratio: if the browser is still holding the
+     stacked source after a resize it stays correctly proportioned. */
   .logo img {
-    width: clamp(150px, 45vw, 190px);
-    aspect-ratio: 960 / 177;
+    width: auto;
+    height: clamp(30px, 8vw, 36px);
+    max-width: 60vw;
   }
 
   .nav {
@@ -598,8 +849,10 @@ button {
   .steps { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   .hero-actions { gap: 12px; }
   .hero-actions .btn { width: 100%; flex: 1 1 100%; }
+  .btn-send { width: 100%; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
-  .footer-copy { margin-left: 0; }
+  .stars svg { width: 18px; height: 18px; }
+  .stars { gap: 9px; }
 }
 
 /* Kill the hard line breaks once the headlines have to wrap on their own */
@@ -608,7 +861,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   12. Preferences
+   16. Preferences
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -621,10 +874,11 @@ button {
 }
 
 @media print {
-  .site-header, .nav-toggle, .skip-link { display: none; }
+  .site-header, .nav-toggle, .skip-link, .quotes-dots { display: none; }
   .js .reveal { opacity: 1; transform: none; }
-  .card, .hero-media, .step-num {
+  .card, .media-block, .step-num, .quotes, .btn-send {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+  .acc-panel { display: block !important; }
 }

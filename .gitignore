@@ -11,3 +11,6 @@
 
 # Logs
 *.log
+
+# Generated preview renders
+preview/
