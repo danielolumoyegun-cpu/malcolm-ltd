@@ -62,7 +62,7 @@
   if (reduced || !('IntersectionObserver' in window)) {
     showAll();
   } else {
-    ['.cards', '.steps'].forEach(function (sel) {
+    ['.steps', '.reasons', '.values', '.support-cards', '.svc-rows'].forEach(function (sel) {
       var group = document.querySelector(sel);
       if (!group) return;
       Array.prototype.slice.call(group.children).forEach(function (child, i) {
