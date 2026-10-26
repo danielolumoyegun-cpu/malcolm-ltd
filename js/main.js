@@ -207,7 +207,7 @@
       if (!key) {
         status.className = 'form-status is-error';
         status.innerHTML = 'This form is not connected yet. Please email ' +
-          '<a href="mailto:hello@malcolmltd.com"><strong>hello@malcolmltd.com</strong></a> ' +
+          '<a href="mailto:info@malcominc.co.uk"><strong>info@malcominc.co.uk</strong></a> ' +
           'and we will come straight back to you.';
         return;
       }
@@ -235,7 +235,7 @@
         .catch(function () {
           status.className = 'form-status is-error';
           status.innerHTML = 'Something went wrong sending that. Please email ' +
-            '<a href="mailto:hello@malcolmltd.com"><strong>hello@malcolmltd.com</strong></a> instead.';
+            '<a href="mailto:info@malcominc.co.uk"><strong>info@malcominc.co.uk</strong></a> instead.';
         })
         .then(function () {
           if (btn) { btn.disabled = false; btn.textContent = label; }
