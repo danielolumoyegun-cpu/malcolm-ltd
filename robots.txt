@@ -1,0 +1,6 @@
+# Client preview — not the live site.
+# Keeps the GitHub Pages copy out of search results so it can never
+# compete with the real domain later.
+# DELETE THIS FILE when the site goes live on its own domain.
+User-agent: *
+Disallow: /
