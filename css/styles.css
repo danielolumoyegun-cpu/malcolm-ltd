@@ -1001,6 +1001,49 @@ button { background: none; border: 0; cursor: pointer; }
 }
 
 /* --------------------------------------------------------------------------
+   19d. Legal / document pages
+   -------------------------------------------------------------------------- */
+.legal { max-width: 860px; margin-inline: auto; }
+.legal .updated { margin-top: 14px; color: var(--ink-soft); font-size: var(--fs-small); }
+
+.legal h2 {
+  margin-top: clamp(36px, 3.2vw, 56px);
+  font-size: var(--fs-h4);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+.legal h3 {
+  margin-top: clamp(22px, 2vw, 34px);
+  font-size: var(--fs-lead);
+  font-weight: 700;
+}
+.legal p, .legal li { line-height: 1.65; }
+.legal p { margin-top: 1em; }
+.legal ul { margin-top: 1em; display: grid; gap: 10px; }
+.legal ul li { position: relative; padding-left: 26px; }
+.legal ul li::before {
+  content: "";
+  position: absolute;
+  left: 4px; top: 0.62em;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+}
+.legal a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.legal dl { margin-top: 1em; display: grid; gap: 14px; }
+.legal dt { font-weight: 700; }
+.legal dd { margin: 4px 0 0; line-height: 1.6; }
+
+.legal-note {
+  margin-top: clamp(32px, 3vw, 52px);
+  padding: clamp(20px, 1.9vw, 32px);
+  background: var(--green-pale);
+  border-radius: var(--r-block);
+  line-height: 1.6;
+}
+.legal-note strong { display: block; margin-bottom: 8px; }
+
+/* --------------------------------------------------------------------------
    20. Scroll reveal
    -------------------------------------------------------------------------- */
 .js .reveal { opacity: 0; transform: translateY(18px); }
